@@ -1,16 +1,19 @@
 using System;
 
-public class Responsavel
+namespace CarControl.Models
 {
-	private double Porcentagem { get; set; }
-	public Responsavel()
+	public class Responsavel
 	{
-			
+		private double Porcentagem { get; set; }
+		public Responsavel()
+		{
+
+		}
+
+		public Responsavel(double porcentagem)
+		{
+			Porcentagem = porcentagem;
+		}
 	}
 
-	public Responsavel(double porcentagem)
-	{
-		Porcentagem = porcentagem;
-	}
 }
-

@@ -1,20 +1,23 @@
 using System;
 
-public class Participacao
+namespace CarControl.Models
 {
-	private double Porcentagem { get; set; }
-
-	private double ParteLucro { get; set; }
-
-	public Participacao()
+	public class Participacao
 	{
+		private double Porcentagem { get; set; }
 
+		private double ParteLucro { get; set; }
+
+		public Participacao()
+		{
+
+		}
+
+		public Participacao(double porcentagem, double parteLucro)
+		{
+			Porcentagem = porcentagem;
+			ParteLucro = parteLucro;
+		}
 	}
 
-	public Participacao(double porcentagem, double parteLucro)
-	{
-		Porcentagem = porcentagem;
-		ParteLucro = parteLucro;
-	}
 }
-

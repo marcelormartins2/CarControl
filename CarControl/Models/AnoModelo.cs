@@ -1,16 +1,18 @@
 using System;
 
-public class AnoModelo
+namespace CarControl.Models
 {
-	public int Ano { get; set; }
-	public AnoModelo()
+	public class AnoModelo
 	{
-			
-	}
+		public int Ano { get; set; }
+		public AnoModelo()
+		{
 
-	public AnoModelo(int ano)
-	{
-		Ano = ano;
+		}
+
+		public AnoModelo(int ano)
+		{
+			Ano = ano;
+		}
 	}
 }
-

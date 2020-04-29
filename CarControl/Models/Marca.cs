@@ -1,21 +1,23 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-public class Marca
+namespace CarControl.Models
 {
-	private string Nome { get; set; }
-
-	private ICollection<Modelo> Modelo { get; set; } = new List<Modelo>();
-
-	public Marca()
+	public class Marca
 	{
+		private string Nome { get; set; }
 
-	}
+		private ICollection<Modelo> Modelo { get; set; } = new List<Modelo>();
 
-	public Marca(string nome, ICollection<Modelo> modelo)
-	{
-		Nome = nome;
-		Modelo = modelo;
+		public Marca()
+		{
+
+		}
+
+		public Marca(string nome, ICollection<Modelo> modelo)
+		{
+			Nome = nome;
+			Modelo = modelo;
+		}
 	}
 }
-
