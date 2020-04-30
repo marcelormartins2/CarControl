@@ -5,6 +5,9 @@ namespace CarControl.Models
 {
 	public class Marca
 	{
+		public int Id { get; set; }
+		public Fabricante Fabricante { get; set; }
+		public int FabricanteId { get; set; }
 		private string Nome { get; set; }
 
 		private ICollection<Modelo> Modelo { get; set; } = new List<Modelo>();

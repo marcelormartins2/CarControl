@@ -10,6 +10,7 @@ namespace CarControl.Models
 		public Marca Marca { get; set; }
 		public int MarcaId { get; set; }
 		private string Nome { get; set; }
-		
+		public ICollection<AnoModelo> AnoModelos { get; set; } = new List<AnoModelo>();
+
 	}
 }
