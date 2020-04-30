@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 
 namespace CarControl.Models
 {
 	public class Veiculo
 	{
 		private Guid Id { get; set; }
+
+		public ICollection<AnoModelo> AnoModelo { get; set; } = new List<AnoModelo>();
+		public int AnoModeloId { get; set; }
 
 		private int Placa { get; set; }
 
@@ -28,9 +32,10 @@ namespace CarControl.Models
 		{
 			this.Id = new Guid();
 		}
-		public Veiculo(int placa, string chassis, string cor, DateTime anoFab, string origem, int renavam, double valorPago, double valorVenda, Fabricante fabricante)
+		public Veiculo(int anoModeloId, int placa, string chassis, string cor, DateTime anoFab, string origem, int renavam, double valorPago, double valorVenda, Fabricante fabricante)
 		{
 			this.Id = new Guid();
+			AnoModeloId = anoModeloId;
 			Placa = placa;
 			Chassis = chassis;
 			Cor = cor;

@@ -12,16 +12,16 @@ namespace CarControl.Models
 		public string Site { get; set; }
 
 		//public ICollection<Marca> Marca { get; set; } = new List<Marca>();
-		public Fabricante()
-		{
+		//public Fabricante()
+		//{
 
-		}
+		//}
 
-		public Fabricante(int id, string nome, string site)
-		{
-			Id = id;
-			Nome = nome;
-			Site = site;
-		}
+		//public Fabricante(int id, string nome, string site)
+		//{
+		//	Id = id;
+		//	Nome = nome;
+		//	Site = site;
+		//}
 	}
 }

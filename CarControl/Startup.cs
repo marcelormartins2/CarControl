@@ -37,6 +37,7 @@ namespace CarControl
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddDbContext<CarControlContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("CarControlContext"), builder =>
                         builder.MigrationsAssembly("CarControl")));
