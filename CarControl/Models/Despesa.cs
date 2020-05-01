@@ -4,13 +4,13 @@ namespace CarControl.Models
 {
 	public class Despesa
 	{
-		private Guid Id { get; set; } = new Guid();
+		public Guid Id { get; set; }
 
-		private string Descricao { get; set; }
+		public string Descricao { get; set; }
 
-		private DateTime Data { get; set; }
+		public DateTime Data { get; set; }
 
-		private double Valor { get; set; }
+		public double Valor { get; set; }
 
 		public Despesa()
 		{

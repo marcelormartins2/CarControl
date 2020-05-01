@@ -5,43 +5,41 @@ namespace CarControl.Models
 {
 	public class Veiculo
 	{
-		private Guid Id { get; set; }
-
-		public ICollection<AnoModelo> AnoModelo { get; set; } = new List<AnoModelo>();
-		public int AnoModeloId { get; set; }
-
-		private int Placa { get; set; }
-
-		private string Chassis { get; set; }
-
-		private string Cor { get; set; }
-
-		private DateTime AnoFab { get; set; }
-
-		private string Origem { get; set; }
-
-		private int Renavam { get; set; }
-
-		private double ValorPago { get; set; }
-
-		private double ValorVenda { get; set; }
-
-		private Fabricante Fabricante { get; set; }
+		public Guid Id { get; set; }
+		public Modelo Modelo { get; set; }
+		public int ModeloId { get; set; }
+		public String Placa { get; set; }
+		public string Chassis { get; set; }
+		public int Hodometro { get; set; }
+		public string Cor { get; set; }
+		public DateTime AnoFab { get; set; }
+		public DateTime AnoModelo { get; set; }
+		public string Origem { get; set; }
+		public int Renavam { get; set; }
+		public double ValorFipe { get; set; }
+		public double ValorPago { get; set; }
+		public double ValorVenda { get; set; }
+		public Fabricante Fabricante { get; set; }
 
 		public Veiculo()
 		{
 			this.Id = new Guid();
 		}
-		public Veiculo(int anoModeloId, int placa, string chassis, string cor, DateTime anoFab, string origem, int renavam, double valorPago, double valorVenda, Fabricante fabricante)
+
+		public Veiculo(Modelo modelo, int modeloId, string placa, string chassis, int hodometro, string cor, DateTime anoFab, DateTime anoModelo, string origem, int renavam, double valorFipe, double valorPago, double valorVenda, Fabricante fabricante)
 		{
 			this.Id = new Guid();
-			AnoModeloId = anoModeloId;
+			Modelo = modelo;
+			ModeloId = modeloId;
 			Placa = placa;
 			Chassis = chassis;
+			Hodometro = hodometro;
 			Cor = cor;
 			AnoFab = anoFab;
+			AnoModelo = anoModelo;
 			Origem = origem;
 			Renavam = renavam;
+			ValorFipe = valorFipe;
 			ValorPago = valorPago;
 			ValorVenda = valorVenda;
 			Fabricante = fabricante;

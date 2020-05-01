@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using CarControl.Models.ViewModel;
+using CarControl.Models.ViewModels;
 
 namespace CarControl.Controllers
 {

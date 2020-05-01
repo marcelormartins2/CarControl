@@ -7,22 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarControl.Data;
 using CarControl.Models;
+using CarControl.Models.ViewModels;
+using CarControl.Services;
 
 namespace CarControl.Controllers
 {
     public class FabricantesController : Controller
     {
-        private readonly CarControlContext _context;
+        private readonly FabricanteService _fabricanteService;
+        private readonly ModeloService _modeloService;
 
-        public FabricantesController(CarControlContext context)
+        public FabricantesController(FabricanteService fabricanteService, ModeloService modeloService)
         {
-            _context = context;
+            _fabricanteService = fabricanteService;
+            _modeloService = modeloService;
         }
+
+
 
         // GET: Fabricantes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Fabricante.ToListAsync());
+            var list = await _fabricanteService.FindAllAsync();
+            return View(list);
         }
 
         // GET: Fabricantes/Details/5
@@ -32,122 +39,120 @@ namespace CarControl.Controllers
             {
                 return NotFound();
             }
-
-            var fabricante = await _context.Fabricante
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (fabricante == null)
-            {
-                return NotFound();
-            }
-
-            return View(fabricante);
+            var modelos = await _modeloService.FindAllAsync(id.Value);
+            //var viewModel = new ModeloViewModel { Modelos = modelos };
+            //if (fabricante == null)
+            //{
+            //    return NotFound();
+            //}
+            return View(modelos);
         }
 
-        // GET: Fabricantes/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Fabricantes/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Fabricantes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Site")] Fabricante fabricante)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(fabricante);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(fabricante);
-        }
+        //// POST: Fabricantes/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Nome,Site")] Fabricante fabricante)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(fabricante);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(fabricante);
+        //}
 
-        // GET: Fabricantes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Fabricantes/Edit/5
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var fabricante = await _context.Fabricante.FindAsync(id);
-            if (fabricante == null)
-            {
-                return NotFound();
-            }
-            return View(fabricante);
-        }
+        //    var fabricante = await _context.Fabricante.FindAsync(id);
+        //    if (fabricante == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(fabricante);
+        //}
 
-        // POST: Fabricantes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Site")] Fabricante fabricante)
-        {
-            if (id != fabricante.Id)
-            {
-                return NotFound();
-            }
+        //// POST: Fabricantes/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Site")] Fabricante fabricante)
+        //{
+        //    if (id != fabricante.Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(fabricante);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FabricanteExists(fabricante.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(fabricante);
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(fabricante);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!FabricanteExists(fabricante.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(fabricante);
+        //}
 
-        // GET: Fabricantes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Fabricantes/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var fabricante = await _context.Fabricante
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (fabricante == null)
-            {
-                return NotFound();
-            }
+        //    var fabricante = await _context.Fabricante
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (fabricante == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(fabricante);
-        }
+        //    return View(fabricante);
+        //}
 
-        // POST: Fabricantes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var fabricante = await _context.Fabricante.FindAsync(id);
-            _context.Fabricante.Remove(fabricante);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: Fabricantes/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var fabricante = await _context.Fabricante.FindAsync(id);
+        //    _context.Fabricante.Remove(fabricante);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool FabricanteExists(int id)
-        {
-            return _context.Fabricante.Any(e => e.Id == id);
-        }
+        //private bool FabricanteExists(int id)
+        //{
+        //    return _context.Fabricante.Any(e => e.Id == id);
+        //}
     }
 }

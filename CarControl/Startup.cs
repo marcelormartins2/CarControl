@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using CarControl.Data;
+using CarControl.Services;
 
 namespace CarControl
 {
@@ -41,6 +42,8 @@ namespace CarControl
             services.AddDbContext<CarControlContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("CarControlContext"), builder =>
                         builder.MigrationsAssembly("CarControl")));
+            services.AddScoped<FabricanteService>();
+            services.AddScoped<ModeloService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

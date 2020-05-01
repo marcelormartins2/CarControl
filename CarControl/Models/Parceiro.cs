@@ -4,15 +4,15 @@ namespace CarControl.Models
 {
 	public class Parceiro
 	{
-		private Guid Id { get; set; } = new Guid();
+		public Guid Id { get; set; } = new Guid();
 
-		private string Nome { get; set; }
+		public string Nome { get; set; }
 
-		private string Email { get; set; }
+		public string Email { get; set; }
 
-		private string Telefone { get; set; }
+		public string Telefone { get; set; }
 
-		private string Endereço { get; set; }
+		public string Endereço { get; set; }
 
 		public Parceiro()
 		{
