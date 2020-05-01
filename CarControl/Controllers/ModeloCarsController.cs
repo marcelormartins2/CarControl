@@ -10,23 +10,23 @@ using CarControl.Models;
 
 namespace CarControl.Controllers
 {
-    public class ModelosController : Controller
+    public class ModeloCarsController : Controller
     {
         private readonly CarControlContext _context;
 
-        public ModelosController(CarControlContext context)
+        public ModeloCarsController(CarControlContext context)
         {
             _context = context;
         }
 
-        // GET: Modelos
+        // GET: ModeloCars
         public async Task<IActionResult> Index()
         {
-            var carControlContext = _context.Modelo.Include(m => m.Fabricante);
+            var carControlContext = _context.ModeloCar.Include(m => m.Fabricante);
             return View(await carControlContext.ToListAsync());
         }
 
-        // GET: Modelos/Details/5
+        // GET: ModeloCars/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace CarControl.Controllers
                 return NotFound();
             }
 
-            var modelo = await _context.Modelo
+            var modeloCar = await _context.ModeloCar
                 .Include(m => m.Fabricante)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (modelo == null)
+            if (modeloCar == null)
             {
                 return NotFound();
             }
 
-            return View(modelo);
+            return View(modeloCar);
         }
 
-        // GET: Modelos/Create
+        // GET: ModeloCars/Create
         public IActionResult Create()
         {
             ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id");
             return View();
         }
 
-        // POST: Modelos/Create
+        // POST: ModeloCars/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FabricanteId,Nome")] Modelo modelo)
+        public async Task<IActionResult> Create([Bind("Id,FabricanteId,Nome")] ModeloCar modeloCar)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(modelo);
+                _context.Add(modeloCar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modelo.FabricanteId);
-            return View(modelo);
+            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modeloCar.FabricanteId);
+            return View(modeloCar);
         }
 
-        // GET: Modelos/Edit/5
+        // GET: ModeloCars/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace CarControl.Controllers
                 return NotFound();
             }
 
-            var modelo = await _context.Modelo.FindAsync(id);
-            if (modelo == null)
+            var modeloCar = await _context.ModeloCar.FindAsync(id);
+            if (modeloCar == null)
             {
                 return NotFound();
             }
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modelo.FabricanteId);
-            return View(modelo);
+            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modeloCar.FabricanteId);
+            return View(modeloCar);
         }
 
-        // POST: Modelos/Edit/5
+        // POST: ModeloCars/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FabricanteId,Nome")] Modelo modelo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FabricanteId,Nome")] ModeloCar modeloCar)
         {
-            if (id != modelo.Id)
+            if (id != modeloCar.Id)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace CarControl.Controllers
             {
                 try
                 {
-                    _context.Update(modelo);
+                    _context.Update(modeloCar);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ModeloExists(modelo.Id))
+                    if (!ModeloCarExists(modeloCar.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace CarControl.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modelo.FabricanteId);
-            return View(modelo);
+            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modeloCar.FabricanteId);
+            return View(modeloCar);
         }
 
-        // GET: Modelos/Delete/5
+        // GET: ModeloCars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace CarControl.Controllers
                 return NotFound();
             }
 
-            var modelo = await _context.Modelo
+            var modeloCar = await _context.ModeloCar
                 .Include(m => m.Fabricante)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (modelo == null)
+            if (modeloCar == null)
             {
                 return NotFound();
             }
 
-            return View(modelo);
+            return View(modeloCar);
         }
 
-        // POST: Modelos/Delete/5
+        // POST: ModeloCars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var modelo = await _context.Modelo.FindAsync(id);
-            _context.Modelo.Remove(modelo);
+            var modeloCar = await _context.ModeloCar.FindAsync(id);
+            _context.ModeloCar.Remove(modeloCar);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ModeloExists(int id)
+        private bool ModeloCarExists(int id)
         {
-            return _context.Modelo.Any(e => e.Id == id);
+            return _context.ModeloCar.Any(e => e.Id == id);
         }
     }
 }

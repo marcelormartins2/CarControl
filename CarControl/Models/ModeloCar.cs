@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CarControl.Models
 {
-	public class Modelo
+	public class ModeloCar
 	{
 		public int Id { get; set; }
 		public Fabricante Fabricante { get; set; }

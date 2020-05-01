@@ -43,7 +43,7 @@ namespace CarControl
                     options.UseMySql(Configuration.GetConnectionString("CarControlContext"), builder =>
                         builder.MigrationsAssembly("CarControl")));
             services.AddScoped<FabricanteService>();
-            services.AddScoped<ModeloService>();
+            services.AddScoped<ModeloCarService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

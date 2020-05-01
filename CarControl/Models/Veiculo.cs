@@ -6,7 +6,7 @@ namespace CarControl.Models
 	public class Veiculo
 	{
 		public Guid Id { get; set; }
-		public Modelo Modelo { get; set; }
+		public ModeloCar ModeloCar { get; set; }
 		public int ModeloId { get; set; }
 		public String Placa { get; set; }
 		public string Chassis { get; set; }
@@ -26,10 +26,10 @@ namespace CarControl.Models
 			this.Id = new Guid();
 		}
 
-		public Veiculo(Modelo modelo, int modeloId, string placa, string chassis, int hodometro, string cor, DateTime anoFab, DateTime anoModelo, string origem, int renavam, double valorFipe, double valorPago, double valorVenda, Fabricante fabricante)
+		public Veiculo(ModeloCar modeloCar, int modeloId, string placa, string chassis, int hodometro, string cor, DateTime anoFab, DateTime anoModelo, string origem, int renavam, double valorFipe, double valorPago, double valorVenda, Fabricante fabricante)
 		{
 			this.Id = new Guid();
-			Modelo = modelo;
+			ModeloCar = modeloCar;
 			ModeloId = modeloId;
 			Placa = placa;
 			Chassis = chassis;

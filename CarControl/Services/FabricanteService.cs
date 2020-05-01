@@ -19,8 +19,16 @@ namespace CarControl.Services
 
         public async Task<List<Fabricante>> FindAllAsync()
         {
-            return await _context.Fabricante.OrderBy(x=>x.Nome).ToListAsync();
+            return await _context.Fabricante.OrderBy(x => x.Nome).ToListAsync();
         }
 
+        public async Task<Fabricante> FindAsync(int id)
+        {
+            var fabricante = await _context.Fabricante
+                .Include(m => m.ModeloCar.Where(x=>x.FabricanteId == id)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            return fabricante;
+        }
     }
-}
+ }

@@ -15,12 +15,12 @@ namespace CarControl.Controllers
     public class FabricantesController : Controller
     {
         private readonly FabricanteService _fabricanteService;
-        private readonly ModeloService _modeloService;
+        private readonly ModeloCarService _modeloCarService;
 
-        public FabricantesController(FabricanteService fabricanteService, ModeloService modeloService)
+        public FabricantesController(FabricanteService fabricanteService, ModeloCarService modeloService)
         {
             _fabricanteService = fabricanteService;
-            _modeloService = modeloService;
+            _modeloCarService = modeloService;
         }
 
 
@@ -39,13 +39,12 @@ namespace CarControl.Controllers
             {
                 return NotFound();
             }
-            var modelos = await _modeloService.FindAllAsync(id.Value);
-            //var viewModel = new ModeloViewModel { Modelos = modelos };
-            //if (fabricante == null)
-            //{
-            //    return NotFound();
-            //}
-            return View(modelos);
+            var fabricante = await _fabricanteService.FindAsync(id.Value);
+            if (fabricante == null)
+            {
+                return NotFound();
+            }
+            return View(fabricante);
         }
 
         //// GET: Fabricantes/Create

@@ -7,21 +7,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarControl.Services
 {
-    public class ModeloService
+    public class ModeloCarService
     {
         public readonly CarControlContext _context;
 
-        public ModeloService(CarControlContext context)
+        public ModeloCarService(CarControlContext context)
         {
             _context = context;
         }
 
-        public async Task<List<Modelo>> FindAllAsync(int fabricanteid)
+        public async Task<List<ModeloCar>> FindAsync(int fabricanteid)
         {
-            var result = from obj in _context.Modelo select obj;
-            result = result.Where(x => x.FabricanteId == fabricanteid);
+
+
+            var objModeloCar = from obj in _context.ModeloCar select obj;
+            objModeloCar = objModeloCar.Where(x => x.FabricanteId == fabricanteid);
             
-            return await result
+            return await objModeloCar
                 .Include(x => x.Fabricante)
                 .OrderByDescending(x => x.Nome)
                 .ToListAsync();

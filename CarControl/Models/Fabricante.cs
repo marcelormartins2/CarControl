@@ -13,7 +13,7 @@ namespace CarControl.Models
 
 		public int Prioridade { get; set; }
 
-		public ICollection<Modelo> Modelo { get; set; } = new List<Modelo>();
+		public ICollection<ModeloCar> ModeloCar { get; set; } = new List<ModeloCar>();
 		//public Fabricante()
 		//{
 

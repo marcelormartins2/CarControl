@@ -15,6 +15,6 @@ namespace CarControl.Data
         }
 
         public DbSet<Fabricante> Fabricante { get; set; }
-        public DbSet<Modelo> Modelo { get; set; }
+        public DbSet<ModeloCar> ModeloCar { get; set; }
     }
 }
