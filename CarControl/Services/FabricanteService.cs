@@ -33,5 +33,12 @@ namespace CarControl.Services
             }
             return await fabricante.Include(x => x.ModeloCar).FirstOrDefaultAsync(z=>z.Id==id);
         }
+
+        public async Task AddAsync(Fabricante fabricante)
+        {
+            _context.Add(fabricante);
+            await _context.SaveChangesAsync();
+
+        }
     }
  }
