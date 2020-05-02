@@ -24,11 +24,14 @@ namespace CarControl.Services
 
         public async Task<Fabricante> FindAsync(int id)
         {
-            var fabricante = await _context.Fabricante
-                .Include(m => m.ModeloCar.Where(x=>x.FabricanteId == id)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            return fabricante;
+            var fabricante = _context.Fabricante; 
+                var result = from obj in _context.ModeloCar select obj;
+            result = result.Where(x => x.FabricanteId==id);
+            if (!result.Any())
+            {
+                return await fabricante.FirstOrDefaultAsync(x=>x.Id==id);
+            }
+            return await fabricante.Include(x => x.ModeloCar).FirstOrDefaultAsync(z=>z.Id==id);
         }
     }
  }
