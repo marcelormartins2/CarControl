@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarControl.Migrations
 {
     [DbContext(typeof(CarControlContext))]
-    [Migration("20200501135649_Altera nome tabeal ModeloCar")]
-    partial class AlteranometabealModeloCar
+    [Migration("20200504130226_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

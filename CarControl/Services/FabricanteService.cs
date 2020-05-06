@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CarControl.Models;
 using CarControl.Data;
 using Microsoft.EntityFrameworkCore;
+using CarControl.Services.Exceptions;
 
 namespace CarControl.Services
 {
@@ -39,6 +40,34 @@ namespace CarControl.Services
             _context.Add(fabricante);
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task Update(Fabricante fabricante)
+        {
+            _context.Update(fabricante);
+            await _context.SaveChangesAsync();
+            
+        }
+
+        internal bool Any(int id)
+        {
+            return _context.Fabricante.Any(e => e.Id == id);
+        }
+
+        internal async Task DeleteAsync(int id)
+        {
+            try
+            {
+                var fabricante = await _context.Fabricante.FindAsync(id);
+                _context.Fabricante.Remove(fabricante);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Can't delete seller because he/she has sales");
+            }
+            
+            
         }
     }
  }

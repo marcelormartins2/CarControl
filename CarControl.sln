@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarControl", "CarControl\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesWebMvc", "..\workshop-asp-net-core-mvc\SalesWebMvc\SalesWebMvc.csproj", "{97ABC4E4-49CA-490A-AD80-0B82C9EA4CA4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestCar", "..\InvestCar\InvestCar.csproj", "{F8D53025-1330-46D1-9E21-C88AB078D575}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{97ABC4E4-49CA-490A-AD80-0B82C9EA4CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97ABC4E4-49CA-490A-AD80-0B82C9EA4CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97ABC4E4-49CA-490A-AD80-0B82C9EA4CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D53025-1330-46D1-9E21-C88AB078D575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D53025-1330-46D1-9E21-C88AB078D575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D53025-1330-46D1-9E21-C88AB078D575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D53025-1330-46D1-9E21-C88AB078D575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,23 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarControl.Data;
 using CarControl.Models;
+using CarControl.Services;
 
 namespace CarControl.Controllers
 {
     public class ModeloCarsController : Controller
     {
+        private readonly ModeloCarService _modeloCarService;
         private readonly CarControlContext _context;
+        private readonly FabricanteService _fabricanteService;
 
-        public ModeloCarsController(CarControlContext context)
+        public ModeloCarsController(ModeloCarService modeloCarService, CarControlContext context, FabricanteService fabricanteService)
         {
+            _modeloCarService = modeloCarService;
             _context = context;
+            _fabricanteService = fabricanteService;
         }
+
+
 
         // GET: ModeloCars
         public async Task<IActionResult> Index()
         {
-            var carControlContext = _context.ModeloCar.Include(m => m.Fabricante);
-            return View(await carControlContext.ToListAsync());
+           return View(await _modeloCarService.FindAllAsync());
         }
 
         // GET: ModeloCars/Details/5
@@ -34,9 +40,7 @@ namespace CarControl.Controllers
                 return NotFound();
             }
 
-            var modeloCar = await _context.ModeloCar
-                .Include(m => m.Fabricante)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var modeloCar = await _modeloCarService.FindAsync(id.Value);
             if (modeloCar == null)
             {
                 return NotFound();
@@ -46,9 +50,9 @@ namespace CarControl.Controllers
         }
 
         // GET: ModeloCars/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id");
+            ViewData["FabricanteId"] = new SelectList(await _fabricanteService.FindAllAsync(), "Id", "Nome");
             return View();
         }
 
@@ -61,11 +65,10 @@ namespace CarControl.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(modeloCar);
-                await _context.SaveChangesAsync();
+                await _modeloCarService.AddAsync(modeloCar);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modeloCar.FabricanteId);
+            ViewData["FabricanteId"] = new SelectList(await _fabricanteService.FindAllAsync(), "Id", "Nome", modeloCar.FabricanteId);
             return View(modeloCar);
         }
 
@@ -77,12 +80,12 @@ namespace CarControl.Controllers
                 return NotFound();
             }
 
-            var modeloCar = await _context.ModeloCar.FindAsync(id);
+            var modeloCar = await _modeloCarService.FindAsync(id.Value);
             if (modeloCar == null)
             {
                 return NotFound();
             }
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modeloCar.FabricanteId);
+            ViewData["FabricanteId"] = new SelectList(await _fabricanteService.FindAllAsync(), "Id", "Nome", modeloCar.FabricanteId);
             return View(modeloCar);
         }
 
@@ -102,8 +105,7 @@ namespace CarControl.Controllers
             {
                 try
                 {
-                    _context.Update(modeloCar);
-                    await _context.SaveChangesAsync();
+                    await _modeloCarService.UpdateAsync(modeloCar);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +120,7 @@ namespace CarControl.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FabricanteId"] = new SelectList(_context.Fabricante, "Id", "Id", modeloCar.FabricanteId);
+            ViewData["FabricanteId"] = new SelectList(await _fabricanteService.FindAllAsync(), "Id", "Nome", modeloCar.FabricanteId);
             return View(modeloCar);
         }
 
@@ -130,9 +132,7 @@ namespace CarControl.Controllers
                 return NotFound();
             }
 
-            var modeloCar = await _context.ModeloCar
-                .Include(m => m.Fabricante)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var modeloCar = await _modeloCarService.FindAsync(id.Value);
             if (modeloCar == null)
             {
                 return NotFound();
@@ -146,9 +146,7 @@ namespace CarControl.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var modeloCar = await _context.ModeloCar.FindAsync(id);
-            _context.ModeloCar.Remove(modeloCar);
-            await _context.SaveChangesAsync();
+            await _modeloCarService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
